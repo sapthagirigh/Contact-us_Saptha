@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      padding: 30px 35px;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 28px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #eee;
+    }
+
+    input:focus,
+    textarea:focus {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: #00ffd5;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      background: #00ffd5;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #00e0c0;
+      transform: translateY(-2px);
+    }
+
+    #thanksMsg {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #a6ffb3;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2> Contact Us</h2>
+
+    <form id="contactForm" novalidate>
+      <div class="input-group">
+        <input type="text" id="name" placeholder="Your Name" required autocomplete="off" />
+      </div>
+
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Your Email" required autocomplete="off"/>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="subject" placeholder="Subject" required autocomplete="off"/>
+      </div>
+
+      <div class="input-group">
+        <textarea id="message" placeholder="Your Message" required autocomplete="off"></textarea>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <p id="thanksMsg" class="hidden"> Thank you! Your message has been sent.</p>
+  </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const thanksMsg = document.getElementById('thanksMsg');
+
+      const isValidEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+      if (name && isValidEmail && subject && message) {
+        thanksMsg.classList.remove('hidden');
+        this.reset();
+
+        setTimeout(() => {
+          thanksMsg.classList.add('hidden');
+        }, 3000);
+      } else {
+        alert("⚠️ Please fill in all fields correctly before submitting.");
+      }
+    });
+  </script>
+
+</body>
+</html>
